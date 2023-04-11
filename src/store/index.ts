@@ -1,7 +1,7 @@
 import { configureStore, type Middleware } from '@reduxjs/toolkit'
 import { toast } from 'sonner'
 
-import usersReducer, { rollbackUser } from './users/slice'
+import usersReducer, { rollbackUser, UserState } from './users/slice'
 
 // Middlewares
 
@@ -17,7 +17,7 @@ const syncWithDatabase: Middleware = (store) => (next) => (action) => {
 	next(action)
 
 	if (type === 'users/deleteUserById') {
-		const userToRemove = previousState.users.find((user) => user.id === payload)
+		const userToRemove = previousState.users.find((user:UserState) => user.id === payload)
 
 		fetch(`https://jsonplaceholder.typicode.com[aaaa]/users/${payload}`, {
 			method: 'DELETE',

@@ -31,12 +31,12 @@ export const usersSlice = createSlice({
 
 		deleteUserById: (state, action: PayloadAction<UserId>) => {
 			const id = action.payload
-			return state.filter((user) => user.id !== id)
+			return state.filter((user:UserState) => user.id !== id)
 		},
 
 		rollbackUser: (state, action: PayloadAction<UserState>) => {
 			const isUserAlreadyDefined = state.find(
-				(user) => user.id === action.payload.id,
+				(user:UserState) => user.id === action.payload.id,
 			)
 			if (!isUserAlreadyDefined) return [...state, action.payload]
 		},
